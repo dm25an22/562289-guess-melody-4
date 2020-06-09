@@ -11,4 +11,4 @@ Thumbs.db
 *.log*
 node_modules/
 public/bundle.js
-public.bundle.js.map
+public/bundle.js.map
