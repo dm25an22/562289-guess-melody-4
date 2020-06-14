@@ -1,11 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import WelcomeSreen from "./welcome-screen.jsx";
+import WelcomeScreen from "./welcome-screen.jsx";
 
-it(`Render WelcomeScreen`, () => {
+it(`Should WelcomeScreen render correctly`, () => {
   const tree = renderer.create(
-      <WelcomeSreen
+      <WelcomeScreen
         errorsCount={3}
+        onWelcomeButtonClick={() => {}}
       />
   ).toJSON();
 

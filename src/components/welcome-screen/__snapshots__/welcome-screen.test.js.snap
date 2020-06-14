@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render WelcomeScreen 1`] = `
+exports[`Should WelcomeScreen render correctly 1`] = `
 <section
   className="welcome"
 >
@@ -16,6 +16,7 @@ exports[`Render WelcomeScreen 1`] = `
   </div>
   <button
     className="welcome__button"
+    onClick={[Function]}
   >
     <span
       className="visually-hidden"
