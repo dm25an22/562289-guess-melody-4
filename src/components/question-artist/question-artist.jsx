@@ -1,65 +1,80 @@
-import React from "react";
+import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
 
-const QuestionArtist = () => {
-  return (
-    <section className="game game--artist">
-      <header className="game__header">
-        <a className="game__back" href="#">
-          <span className="visually-hidden">Сыграть ещё раз</span>
-          <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию"/>
-        </a>
+class QuestionArtist extends PureComponent {
 
-        <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-          <circle className="timer__line" cx="390" cy="390" r="370"
-            style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}} />
-        </svg>
+  render() {
+    const {question} = this.props;
+    const {song, answers} = question;
 
-        <div className="game__mistakes">
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-        </div>
-      </header>
+    return (
+      <section className="game game--artist">
+        <header className="game__header">
+          <a className="game__back" href="#">
+            <span className="visually-hidden">Сыграть ещё раз</span>
+            <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию"/>
+          </a>
 
-      <section className="game__screen">
-        <h2 className="game__title">Кто исполняет эту песню?</h2>
-        <div className="game__track">
-          <div className="track">
-            <button className="track__button track__button--play" type="button"></button>
-            <div className="track__status">
-              <audio></audio>
+          <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
+            <circle className="timer__line" cx="390" cy="390" r="370"
+              style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}} />
+          </svg>
+
+          <div className="game__mistakes">
+            <div className="wrong"></div>
+            <div className="wrong"></div>
+            <div className="wrong"></div>
+          </div>
+        </header>
+
+        <section className="game__screen">
+          <h2 className="game__title">Кто исполняет эту песню?</h2>
+          <div className="game__track">
+            <div className="track">
+              <button className="track__button track__button--play" type="button"></button>
+              <div className="track__status">
+                <audio src={song.src}></audio>
+              </div>
             </div>
           </div>
-        </div>
 
-        <form className="game__artist">
-          <div className="artist">
-            <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-1" id="answer-1"/>
-            <label className="artist__name" htmlFor="answer-1">
-              <img className="artist__picture" src="http://placehold.it/134x134" alt="Пелагея"/>
-                Пелагея
-            </label>
-          </div>
-
-          <div className="artist">
-            <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-2" id="answer-2"/>
-            <label className="artist__name" htmlFor="answer-2">
-              <img className="artist__picture" src="http://placehold.it/134x134" alt="Пелагея"/>
-                Краснознаменная дивизия имени моей бабушки
-            </label>
-          </div>
-
-          <div className="artist">
-            <input className="artist__input visually-hidden" type="radio" name="answer" value="artist-3" id="answer-3"/>
-            <label className="artist__name" htmlFor="answer-3">
-              <img className="artist__picture" src="http://placehold.it/134x134" alt="Пелагея"/>
-                Lorde
-            </label>
-          </div>
-        </form>
+          <form className="game__artist">
+            {answers.map((answer, i) => {
+              const {picture, artist} = answer;
+              return (
+                <div key={String(new Date() + Math.random())} className="artist">
+                  <input
+                    className="artist__input visually-hidden"
+                    type="radio"
+                    name="answer"
+                    value={`answer-${i}`}
+                    id={`answer-${i}`}/>
+                  <label className="artist__name" htmlFor={`answer-${i}`}>
+                    <img className="artist__picture" src={picture} alt={artist}/>
+                    {artist}
+                  </label>
+                </div>
+              );
+            })}
+          </form>
+        </section>
       </section>
-    </section>
-  );
+    );
+  }
+}
+
+QuestionArtist.propTypes = {
+  question: PropTypes.shape({
+    type: PropTypes.string.isRequired,
+    song: PropTypes.shape({
+      artist: PropTypes.string.isRequired,
+      src: PropTypes.string.isRequired
+    }).isRequired,
+    answers: PropTypes.arrayOf(PropTypes.shape({
+      picture: PropTypes.string.isRequired,
+      artist: PropTypes.string.isRequired
+    })).isRequired
+  })
 };
 
 export default QuestionArtist;

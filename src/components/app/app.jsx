@@ -8,7 +8,7 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 const welcomeButtonHandler = () => {};
 
-const App = ({errorsCount}) => {
+const App = ({errorsCount, questions}) => {
   return (
     <BrowserRouter>
       <Switch>
@@ -19,10 +19,14 @@ const App = ({errorsCount}) => {
           />;
         </Route>
         <Route exact path="/dev-genre">
-          <QuestionGenre />
+          <QuestionGenre
+            question={questions[0]}
+          />
         </Route>
         <Route exact path="/dev-artist">
-          <QuestionArtist />
+          <QuestionArtist
+            question={questions[1]}
+          />
         </Route>
       </Switch>
     </BrowserRouter>
@@ -30,7 +34,8 @@ const App = ({errorsCount}) => {
 };
 
 App.propTypes = {
-  errorsCount: PropTypes.number.isRequired
+  errorsCount: PropTypes.number.isRequired,
+  questions: PropTypes.array.isRequired
 };
 
 export default App;
