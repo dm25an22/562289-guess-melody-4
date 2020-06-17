@@ -42,7 +42,10 @@ const QuestionArtist = ({question, onAnswer}) => {
             return (
               <div key={String(new Date() + Math.random())} className="artist">
                 <input
-                  onChange={onAnswer}
+                  onChange={(evt) => {
+                    evt.preventDefault();
+                    onAnswer(question, answer);
+                  }}
                   className="artist__input visually-hidden"
                   type="radio"
                   name="answer"

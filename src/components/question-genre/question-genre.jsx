@@ -13,7 +13,6 @@ class QuestionGenre extends PureComponent {
   render() {
     const {question, onAnswer} = this.props;
     const {genre, answers} = question;
-
     return (
       <section className="game game--genre">
         <header className="game__header">
@@ -39,7 +38,7 @@ class QuestionGenre extends PureComponent {
           <form
             onSubmit={(evt) => {
               evt.preventDefault();
-              onAnswer();
+              onAnswer(question, this.state.checkboxAnswers);
             }}
             className="game__tracks">
 
