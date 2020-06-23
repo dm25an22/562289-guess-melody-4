@@ -5,6 +5,8 @@ export default class AudioPlayer extends React.PureComponent {
   constructor(props) {
     super(props);
 
+    this._audioRef = React.createRef();
+
     this.state = {
       progress: 0,
       isLoading: true,
@@ -13,34 +15,36 @@ export default class AudioPlayer extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {src} = this.props.src;
+    const {src} = this.props;
+    const audio = this._audioRef.current;
 
-    this._audio = new Audio(src);
+    audio.src = src;
 
-    this._audio.oncanplaythrough = () => {
+    audio.oncanplaythrough = () => {
       this.setState({isLoading: false});
     };
 
-    this._audio.onplay = () => {
+    audio.onplay = () => {
       this.setState({isPlaying: true});
     };
 
-    this._audio.onpause = () => {
+    audio.onpause = () => {
       this.setState({isPlaying: false});
     };
 
-    this._audio.ontimeupdate = () => {
-      this.setState({progress: this._audio.currentTime});
+    audio.ontimeupdate = () => {
+      this.setState({progress: audio.currentTime});
     };
   }
 
   componentWillUnmount() {
-    this._audio.oncanplaythrough = null;
-    this._audio.onplay = null;
-    this._audio.onpause = null;
-    this._audio.ontimeupdate = null;
-    this._audio.src = ``;
-    this._audio = null;
+    const audio = this._audioRef.current;
+
+    audio.oncanplaythrough = null;
+    audio.onplay = null;
+    audio.onpause = null;
+    audio.ontimeupdate = null;
+    audio.src = ``;
   }
 
   render() {
@@ -50,22 +54,25 @@ export default class AudioPlayer extends React.PureComponent {
           onClick={() => this.setState((prevState) => ({
             isPlaying: !prevState.isPlaying
           }))}
-          disabled={this.state.isLoading}
           className={`track__button track__button--${this.state.isPlaying ? `pause` : `play`}`}
           type="button">
         </button>
         <div className="track__status">
-          <audio />
+          <audio
+            ref={this._audioRef}
+          />
         </div>
       </>
     );
   }
 
   componentDidUpdate() {
+    const audio = this._audioRef.current;
+
     if (this.state.isPlaying) {
-      this._audio.play();
+      audio.play();
     } else {
-      this._audio.pause();
+      audio.pause();
     }
   }
 }

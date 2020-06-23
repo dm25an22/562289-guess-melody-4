@@ -24,12 +24,16 @@ const question = {
 };
 
 it(`Render QuestionGenre`, () => {
-  const tree = renderer.create((
-    <QuestionGenre
-      question={question}
-      onAnswer={() => {}}
-    />
-  )).toJSON();
+  const tree = renderer.create(
+      <QuestionGenre
+        question={question}
+        onAnswer={() => {}}
+      />, {
+        createNodeMock: () => {
+          return {};
+        }
+      }
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
