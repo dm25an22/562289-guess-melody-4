@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import WelcomeScreen from "../welcome-screen/welcome-screen.jsx";
+import GameScreen from "../game-screen/game-screen.jsx";
 import QuestionGenre from "../question-genre/question-genre.jsx";
 import QuestionArtist from "../question-artist/question-artist.jsx";
 import PropTypes from "prop-types";
@@ -62,26 +63,34 @@ class App extends PureComponent {
       switch (question.type) {
         case GameType.ARTIST:
           return (
-            <QuestionArtist
-              question={question}
-              onAnswer={() => {
-                this.setState((prevState) => ({
-                  step: prevState.step + 1
-                }));
-              }}
-            />
+            <GameScreen
+              type={question.type}
+            >
+              <QuestionArtist
+                question={question}
+                onAnswer={() => {
+                  this.setState((prevState) => ({
+                    step: prevState.step + 1
+                  }));
+                }}
+              />
+            </GameScreen>
           );
 
         case GameType.GENRE:
           return (
-            <QuestionGenre
-              question={question}
-              onAnswer={() => {
-                this.setState((prevState) => ({
-                  step: prevState.step + 1
-                }));
-              }}
-            />
+            <GameScreen
+              type={question.type}
+            >
+              <QuestionGenre
+                question={question}
+                onAnswer={() => {
+                  this.setState((prevState) => ({
+                    step: prevState.step + 1
+                  }));
+                }}
+              />
+            </GameScreen>
           );
       }
     }
