@@ -6,7 +6,10 @@ import QuestionArtist from "../question-artist/question-artist.jsx";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {GameType} from "../../const.js";
+import withAudioPlayer from "../../hocs/with-audio-player";
 
+const QuestionGenreWrapped = withAudioPlayer(QuestionGenre);
+const QuestionArtistWrapped = withAudioPlayer(QuestionArtist);
 class App extends PureComponent {
   constructor(props) {
     super(props);
@@ -25,13 +28,13 @@ class App extends PureComponent {
             {this._renderGameScreen()}
           </Route>
           <Route exact path="/dev-genre">
-            <QuestionGenre
+            <QuestionGenreWrapped
               question={questions[0]}
               onAnswer={() => {}}
             />
           </Route>
           <Route exact path="/dev-artist">
-            <QuestionArtist
+            <QuestionArtistWrapped
               question={questions[1]}
               onAnswer={() => {}}
             />
@@ -66,7 +69,7 @@ class App extends PureComponent {
             <GameScreen
               type={question.type}
             >
-              <QuestionArtist
+              <QuestionArtistWrapped
                 question={question}
                 onAnswer={() => {
                   this.setState((prevState) => ({
@@ -82,7 +85,7 @@ class App extends PureComponent {
             <GameScreen
               type={question.type}
             >
-              <QuestionGenre
+              <QuestionGenreWrapped
                 question={question}
                 onAnswer={() => {
                   this.setState((prevState) => ({

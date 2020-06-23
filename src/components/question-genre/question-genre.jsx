@@ -1,7 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {GameType} from "../../const.js";
-import AudioPlayer from "../audio-player/audio-player.jsx";
 
 class QuestionGenre extends PureComponent {
   constructor(props) {
@@ -13,7 +12,7 @@ class QuestionGenre extends PureComponent {
 
 
   render() {
-    const {question, onAnswer} = this.props;
+    const {question, onAnswer, renderPlayer} = this.props;
     const {genre, answers} = question;
     return (
       <section className="game__screen">
@@ -26,11 +25,8 @@ class QuestionGenre extends PureComponent {
           className="game__tracks">
 
           {answers.map((answer, i) => (
-            <div key={String(new Date() + Math.random())} className="track">
-              <AudioPlayer
-                isPlaying={i === 0}
-                src={answer.src}
-              />
+            <div key={answer.genre + i} className="track">
+              {renderPlayer(answer.src, i)}
               <div className="game__answer">
                 <input
                   onChange={(evt) => {
@@ -65,6 +61,7 @@ class QuestionGenre extends PureComponent {
 
 QuestionGenre.propTypes = {
   onAnswer: PropTypes.func.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
   question: PropTypes.shape({
     answers: PropTypes.arrayOf(PropTypes.shape({
       src: PropTypes.string.isRequired,

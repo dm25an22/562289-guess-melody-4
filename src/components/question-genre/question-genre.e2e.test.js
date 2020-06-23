@@ -1,11 +1,6 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {shallow} from "enzyme";
 import QuestionGenre from "./question-genre.jsx";
-
-Enzyme.configure({
-  adapter: new Adapter()
-});
 
 const mock = {
   question: {
@@ -65,6 +60,7 @@ it(`User answer passed to callback is consistent with "userAnswer" prop`, () => 
     <QuestionGenre
       question={question}
       onAnswer={onAnswer}
+      renderPlayer={() => {}}
     />
   ));
 

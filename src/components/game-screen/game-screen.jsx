@@ -31,7 +31,7 @@ GameScreen.propTypes = {
   type: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
+    PropTypes.node.isRequired
   ]).isRequired
 };
 

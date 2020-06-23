@@ -1,6 +1,5 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {shallow} from "enzyme";
 import QuestionArtist from "./question-artist";
 
 const mockEvent = {
@@ -36,10 +35,6 @@ const userAnswer = {
   picture: `pic-one`,
 };
 
-Enzyme.configure({
-  adapter: new Adapter()
-});
-
 it(`Click on user answer should pass to the callback data-object from which this answer was created`, () => {
   const onAnswer = jest.fn();
   const {question} = mock;
@@ -48,6 +43,7 @@ it(`Click on user answer should pass to the callback data-object from which this
       <QuestionArtist
         question={question}
         onAnswer={onAnswer}
+        onButtonClick={() => {}}
       />
   );
 

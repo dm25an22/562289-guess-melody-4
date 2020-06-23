@@ -7,6 +7,7 @@ it(`Render AudioPlayer`, () => {
       <AudioPlayer
         isPlaying={true}
         src={`something`}
+        onButtonClick={() => {}}
       />,
       {
         createNodeMock: () => {

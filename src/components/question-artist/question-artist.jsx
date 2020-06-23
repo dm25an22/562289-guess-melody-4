@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AudioPlayer from "../audio-player/audio-player.jsx";
 
-const QuestionArtist = ({question, onAnswer}) => {
-
+const QuestionArtist = (props) => {
+  const {question, onAnswer, renderPlayer} = props;
   const {song, answers} = question;
 
   return (
@@ -11,10 +10,7 @@ const QuestionArtist = ({question, onAnswer}) => {
       <h2 className="game__title">Кто исполняет эту песню?</h2>
       <div className="game__track">
         <div className="track">
-          <AudioPlayer
-            isPlaying={true}
-            src={song.src}
-          />
+          {renderPlayer(song.src, 0)}
         </div>
       </div>
 
@@ -43,10 +39,12 @@ const QuestionArtist = ({question, onAnswer}) => {
       </form>
     </section>
   );
+
 };
 
 QuestionArtist.propTypes = {
   onAnswer: PropTypes.func.isRequired,
+  renderPlayer: PropTypes.func.isRequired,
   question: PropTypes.shape({
     type: PropTypes.string.isRequired,
     song: PropTypes.shape({

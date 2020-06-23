@@ -25,6 +25,7 @@ it(`Render QuestionArtist`, () => {
       <QuestionArtist
         question={question}
         onAnswer={() => {}}
+        onButtonClick={() => {}}
       />, {
         createNodeMock: () => {
           return {};
