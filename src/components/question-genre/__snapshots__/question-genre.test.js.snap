@@ -18,16 +18,6 @@ exports[`Render QuestionGenre 1`] = `
     <div
       className="track"
     >
-      <button
-        className="track__button track__button--pause"
-        onClick={[Function]}
-        type="button"
-      />
-      <div
-        className="track__status"
-      >
-        <audio />
-      </div>
       <div
         className="game__answer"
       >
@@ -51,16 +41,6 @@ exports[`Render QuestionGenre 1`] = `
     <div
       className="track"
     >
-      <button
-        className="track__button track__button--play"
-        onClick={[Function]}
-        type="button"
-      />
-      <div
-        className="track__status"
-      >
-        <audio />
-      </div>
       <div
         className="game__answer"
       >
@@ -84,16 +64,6 @@ exports[`Render QuestionGenre 1`] = `
     <div
       className="track"
     >
-      <button
-        className="track__button track__button--play"
-        onClick={[Function]}
-        type="button"
-      />
-      <div
-        className="track__status"
-      >
-        <audio />
-      </div>
       <div
         className="game__answer"
       >
@@ -117,16 +87,6 @@ exports[`Render QuestionGenre 1`] = `
     <div
       className="track"
     >
-      <button
-        className="track__button track__button--play"
-        onClick={[Function]}
-        type="button"
-      />
-      <div
-        className="track__status"
-      >
-        <audio />
-      </div>
       <div
         className="game__answer"
       >

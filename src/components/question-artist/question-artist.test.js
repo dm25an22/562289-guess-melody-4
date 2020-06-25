@@ -23,6 +23,7 @@ const question = {
 it(`Render QuestionArtist`, () => {
   const tree = renderer.create(
       <QuestionArtist
+        renderPlayer={() => {}}
         question={question}
         onAnswer={() => {}}
         onButtonClick={() => {}}

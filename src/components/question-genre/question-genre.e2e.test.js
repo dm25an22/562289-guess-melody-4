@@ -34,10 +34,12 @@ const mockEvent = {
 it(`When user answers genre question form is not sent`, () => {
   const {question} = mock;
   const onAnswer = jest.fn();
-  const genreQuestion = shallow(<QuestionGenre
-    onAnswer={onAnswer}
-    question={question}
-  />);
+  const genreQuestion = shallow(
+      <QuestionGenre
+        onAnswer={onAnswer}
+        question={question}
+        renderPlayer={() => {}}
+      />);
 
   const form = genreQuestion.find(`form`);
   const formSendPrevention = jest.fn();
