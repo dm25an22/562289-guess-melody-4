@@ -10,6 +10,9 @@
     "test": "npm run eslint && npm run test.jest",
     "test.jest": "jest"
   },
+  "jest": {
+    "setupFilesAfterEnv": ["./src/setup-tests.js"]
+  },
   "devDependencies": {
     "@babel/core": "7.10.2",
     "@babel/preset-env": "7.10.2",
