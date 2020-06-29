@@ -1,6 +1,6 @@
 import React from "react";
 import rerender from "react-test-renderer";
-import GameScreen from "./game-screen.jsx";
+import {GameScreen} from "./game-screen.jsx";
 import {GameType} from "../../const";
 
 const children = <div className="children-component" />;
@@ -11,6 +11,7 @@ describe(`Render GameScreen`, () => {
     const tree = rerender.create(
         <GameScreen
           type={GameType.ARTIST}
+          mistakes={3}
         >
           {children}
         </GameScreen>
@@ -23,6 +24,7 @@ describe(`Render GameScreen`, () => {
     const tree = rerender.create(
         <GameScreen
           type={GameType.GENRE}
+          mistakes={3}
         >
           {children}
         </GameScreen>

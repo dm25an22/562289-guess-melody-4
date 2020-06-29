@@ -18,7 +18,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {questions} = this.props;
+    const {questions, onUserAnswer} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -28,13 +28,13 @@ class App extends PureComponent {
           <Route exact path="/dev-genre">
             <QuestionGenreWrapped
               question={questions[0]}
-              onAnswer={() => {}}
+              onAnswer={onUserAnswer}
             />
           </Route>
           <Route exact path="/dev-artist">
             <QuestionArtistWrapped
               question={questions[1]}
-              onAnswer={() => {}}
+              onAnswer={onUserAnswer}
             />
           </Route>
         </Switch>
@@ -44,7 +44,7 @@ class App extends PureComponent {
 
   _renderGameScreen() {
     const {
-      errorsCount,
+      maxMistakes,
       questions,
       step,
       onWelcomeButtonClick,
@@ -56,7 +56,7 @@ class App extends PureComponent {
     if (step === -1 || step >= questions.length) {
       return (
         <WelcomeScreen
-          errorsCount={errorsCount}
+          errorsCount={maxMistakes}
           onWelcomeButtonClick={onWelcomeButtonClick}
         />
       );
@@ -95,7 +95,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  errorsCount: PropTypes.number.isRequired,
+  maxMistakes: PropTypes.number.isRequired,
   questions: PropTypes.array.isRequired,
   step: PropTypes.number.isRequired,
   onWelcomeButtonClick: PropTypes.func.isRequired,
@@ -103,7 +103,9 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  step: state.step
+  step: state.step,
+  questions: state.questions,
+  maxMistakes: state.maxMistakes
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -111,7 +113,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.incrementStep());
   },
 
-  onUserAnswer() {
+  onUserAnswer(question, userAnswer) {
+    dispatch(ActionCreator.incrementMistake(question, userAnswer));
     dispatch(ActionCreator.incrementStep());
   }
 });
