@@ -104,7 +104,7 @@ it(`Reducer should increment number of mistakes by a given value`, () => {
   });
 });
 
-it(`Action creators work correctly`, () => {
+it(`Action creators for incrementing step return appropriate type and payload`, () => {
   expect(ActionCreator.incrementStep()).toEqual({
     type: ActionType.INCREMENT_STEP,
     payload: 1,
