@@ -1,6 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import {App} from "./app.jsx";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+
+const mockStore = configureStore([]);
 
 const questions = [
   {
@@ -44,14 +48,70 @@ const questions = [
   }
 ];
 
-it(`Render App`, () => {
-  const tree = renderer
-    .create(
-        <App
-          questions={questions}
-          errorsCount={3}
-        />
-    ).toJSON();
+const maxMistakes = 3;
 
-  expect(tree).toMatchSnapshot();
+describe(`Render App`, () => {
+  const store = mockStore({
+    mistakes: 3,
+  });
+  it(`Render WelcomeScreen`, () => {
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <App
+              questions={questions}
+              maxMistakes={maxMistakes}
+              onUserAnswer={() => {}}
+              onWelcomeButtonClick={() => {}}
+              step={-1}
+            />
+          </Provider>, {
+            createNodeMock: () => {
+              return {};
+            }
+          }).toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+
+  it(`Render QuestionGenre`, () => {
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <App
+              questions={questions}
+              maxMistakes={maxMistakes}
+              onUserAnswer={() => {}}
+              onWelcomeButtonClick={() => {}}
+              step={0}
+            />
+          </Provider>, {
+            createNodeMock: () => {
+              return {};
+            }
+          }).toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Render QuestionArtist`, () => {
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <App
+              questions={questions}
+              maxMistakes={maxMistakes}
+              onUserAnswer={() => {}}
+              onWelcomeButtonClick={() => {}}
+              step={1}
+            />
+          </Provider>, {
+            createNodeMock: () => {
+              return {};
+            }
+          }).toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });
