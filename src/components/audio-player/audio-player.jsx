@@ -1,12 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default class AudioPlayer extends React.PureComponent {
-
-  render() {
-    const {onButtonClick, isPlaying, children} = this.props;
-
-    return (
+const AudioPlayer = ({onButtonClick, isPlaying, children}) => {
+  return (
       <>
         <button
           onClick={onButtonClick}
@@ -17,10 +13,9 @@ export default class AudioPlayer extends React.PureComponent {
           {children}
         </div>
       </>
-    );
-  }
+  );
+};
 
-}
 
 AudioPlayer.propTypes = {
   children: PropTypes.oneOfType([
@@ -30,3 +25,5 @@ AudioPlayer.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   onButtonClick: PropTypes.func.isRequired
 };
+
+export default AudioPlayer;

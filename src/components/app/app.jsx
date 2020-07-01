@@ -7,10 +7,11 @@ import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {GameType} from "../../const.js";
 import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
+import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
 import {ActionCreator} from "../../reducer.js";
 import {connect} from "react-redux";
 
-const QuestionGenreWrapped = withAudioPlayer(QuestionGenre);
+const QuestionGenreWrapped = withAudioPlayer(withUserAnswer(QuestionGenre));
 const QuestionArtistWrapped = withAudioPlayer(QuestionArtist);
 class App extends PureComponent {
   constructor(props) {

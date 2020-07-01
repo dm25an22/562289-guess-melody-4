@@ -8,6 +8,7 @@ it(`Render AudioPlayer`, () => {
         isPlaying={true}
         isLoading={true}
         onButtonClick={() => {}}
+        renderPlayer={() => {}}
       >
         <audio />
       </AudioPlayer>,
