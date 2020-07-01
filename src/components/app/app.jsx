@@ -6,7 +6,7 @@ import QuestionArtist from "../question-artist/question-artist.jsx";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {GameType} from "../../const.js";
-import withAudioPlayer from "../../hocs/with-audio-player";
+import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
 import {ActionCreator} from "../../reducer.js";
 import {connect} from "react-redux";
 

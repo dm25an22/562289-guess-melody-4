@@ -76,9 +76,7 @@ exports[`Render App Render QuestionArtist 1`] = `
         />
         <div
           className="track__status"
-        >
-          <audio />
-        </div>
+        />
       </div>
     </div>
     <form
@@ -237,9 +235,7 @@ exports[`Render App Render QuestionGenre 1`] = `
         />
         <div
           className="track__status"
-        >
-          <audio />
-        </div>
+        />
         <div
           className="game__answer"
         >
@@ -270,9 +266,7 @@ exports[`Render App Render QuestionGenre 1`] = `
         />
         <div
           className="track__status"
-        >
-          <audio />
-        </div>
+        />
         <div
           className="game__answer"
         >
@@ -303,9 +297,7 @@ exports[`Render App Render QuestionGenre 1`] = `
         />
         <div
           className="track__status"
-        >
-          <audio />
-        </div>
+        />
         <div
           className="game__answer"
         >
@@ -336,9 +328,7 @@ exports[`Render App Render QuestionGenre 1`] = `
         />
         <div
           className="track__status"
-        >
-          <audio />
-        </div>
+        />
         <div
           className="game__answer"
         >
