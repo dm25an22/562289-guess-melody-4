@@ -1,31 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const QuestionGenreItem = ({answer, index, userAnswer, onChange, renderPlayer}) => {
-  const {src} = answer;
+class QuestionGenreItem extends React.PureComponent {
 
-  return (
-    <div className="track">
-      {renderPlayer(src, index)}
-      <div className="game__answer">
-        <input
-          onChange={(evt) => {
-            const value = evt.target.checked;
-            onChange(value, index);
-          }}
-          className="game__input visually-hidden"
-          type="checkbox"
-          name="answer"
-          value={`answer-${index}`}
-          id={`answer-${index}`}
-          checked={userAnswer}
+  render() {
+    const {answer, index, userAnswer, onChange, renderPlayer} = this.props;
+    const {src} = answer;
 
-        />
-        <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
+    return (
+      <div className="track">
+        {renderPlayer(src, index)}
+        <div className="game__answer">
+          <input
+            onChange={(evt) => {
+              const value = evt.target.checked;
+              onChange(value, index);
+            }}
+            className="game__input visually-hidden"
+            type="checkbox"
+            name="answer"
+            value={`answer-${index}`}
+            id={`answer-${index}`}
+            checked={userAnswer}
+          />
+          <label className="game__check" htmlFor={`answer-${index}`}>Отметить</label>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+
+}
 
 QuestionGenreItem.propTypes = {
   onChange: PropTypes.func.isRequired,

@@ -34,7 +34,9 @@ const withAudio = (Component) => {
       };
 
       audio.ontimeupdate = () => {
-        this.setState({progress: audio.currentTime});
+        this.setState({
+          progress: Math.floor(audio.currentTime)
+        });
       };
     }
 
@@ -75,7 +77,7 @@ const withAudio = (Component) => {
     componentDidUpdate() {
       const audio = this._audioRef.current;
 
-      if (this.props.isPlaying) {
+      if (this.state.isPlaying) {
         audio.play();
       } else {
         audio.pause();
