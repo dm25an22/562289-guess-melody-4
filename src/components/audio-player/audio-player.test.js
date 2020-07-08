@@ -5,11 +5,13 @@ import AudioPlayer from "./audio-player.jsx";
 it(`Render AudioPlayer`, () => {
   const tree = rerender.create(
       <AudioPlayer
-        renderPlayer={() => {}}
         isPlaying={true}
-        src={`something`}
+        isLoading={true}
         onButtonClick={() => {}}
-      />,
+        renderPlayer={() => {}}
+      >
+        <audio />
+      </AudioPlayer>,
       {
         createNodeMock: () => {
           return {};

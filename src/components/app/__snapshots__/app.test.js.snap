@@ -1,6 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render App Render QuestionArtist 1`] = `
+exports[`Render App render GameOverScreen component 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="result__title"
+  >
+    Какая жалость!
+  </h2>
+  <p
+    className="result__total result__total--fail"
+  >
+    У вас закончились все попытки. Ничего, повезёт в следующий раз!
+  </p>
+  <button
+    className="replay"
+    onClick={[Function]}
+    type="button"
+  >
+    Попробовать ещё раз
+  </button>
+</section>
+`;
+
+exports[`Render App render QuestionArtist component 1`] = `
 <section
   className="game game--artist"
 >
@@ -158,7 +192,7 @@ exports[`Render App Render QuestionArtist 1`] = `
 </section>
 `;
 
-exports[`Render App Render QuestionGenre 1`] = `
+exports[`Render App render QuestionGenre component 1`] = `
 <section
   className="game game--genre"
 >
@@ -370,7 +404,7 @@ exports[`Render App Render QuestionGenre 1`] = `
 </section>
 `;
 
-exports[`Render App Render WelcomeScreen 1`] = `
+exports[`Render App renders WelcomeScreen component 1`] = `
 <section
   className="welcome"
 >
@@ -421,5 +455,43 @@ exports[`Render App Render WelcomeScreen 1`] = `
   >
     Удачи!
   </p>
+</section>
+`;
+
+exports[`Render App renders WinScreen component 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="result__title"
+  >
+    Вы настоящий меломан!
+  </h2>
+  <p
+    className="result__total"
+  >
+    Вы ответили правильно на 
+    2
+     вопросов и совершили 
+    0
+     ошибки
+  </p>
+  <button
+    className="replay"
+    onClick={[Function]}
+    type="button"
+  >
+    Сыграть ещё раз
+  </button>
 </section>
 `;

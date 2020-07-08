@@ -1,4 +1,5 @@
 import {reducer, ActionType, ActionCreator} from "./reducer";
+import {extend} from "./utils";
 
 const questions = [
   {
@@ -42,13 +43,15 @@ const questions = [
   }
 ];
 
+const defaultState = {
+  mistakes: 0,
+  maxMistakes: 3,
+  step: -1,
+  questions
+};
+
 it(`Reducer without additional parameters should return initial state`, () => {
-  expect(reducer(void 0, {})).toEqual({
-    step: -1,
-    mistakes: 0,
-    questions,
-    maxMistakes: 3
-  });
+  expect(reducer(void 0, {})).toEqual(defaultState);
 });
 
 it(`Reducer should increment current step by a given value`, () => {
@@ -77,7 +80,6 @@ it(`Reducer should increment current step by a given value`, () => {
     mistakes: 0,
     questions
   });
-
 });
 
 it(`Reducer should increment number of mistakes by a given value`, () => {
@@ -193,7 +195,39 @@ it(`Action creator for incrementing mistake returns action with 0 payload if ans
   });
 });
 
-it(`Action creator for incrementing mistake returns action with 1 payload if answer for genre is incorrect`, () => {
+it(`Reducer should return step 0 and other states default`, () => {
+  expect(reducer({
+    step: 5,
+    mistakes: 1,
+  }, {
+    type: ActionType.RESET_GAME,
+    payload: null,
+  })).toEqual(extend(defaultState, {
+    step: 0
+  }));
+
+  expect(reducer({
+    step: 0,
+    mistakes: 0,
+  }, {
+    type: ActionType.RESET_GAME,
+    payload: null,
+  })).toEqual(extend(defaultState, {
+    step: 0
+  }));
+
+  expect(reducer({
+    step: -1,
+    mistakes: 0,
+  }, {
+    type: ActionType.RESET_GAME,
+    payload: null,
+  })).toEqual(extend(defaultState, {
+    step: 0
+  }));
+});
+
+it(`returns action with 1 payload if answer for genre is incorrect`, () => {
   expect(ActionCreator.incrementMistake({
     type: `genre`,
     genre: `jazz`,
@@ -216,4 +250,12 @@ it(`Action creator for incrementing mistake returns action with 1 payload if ans
     type: ActionType.INCREMENT_MISTAKES,
     payload: 1,
   });
+});
+
+it(`returns action with null payload for reset game`, () => {
+  expect(ActionCreator.resetGame())
+    .toEqual({
+      type: ActionType.RESET_GAME,
+      payload: null,
+    });
 });
