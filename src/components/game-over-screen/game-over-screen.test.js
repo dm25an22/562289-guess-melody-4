@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import GameOverScreen from "./game-over-screen.jsx";
 
-it(`Should GameOverScreen render correctly`, () => {
+it(`render GameOverScreen component`, () => {
   const tree = renderer
     .create(<GameOverScreen
       onReplayButtonClick={() => {}}

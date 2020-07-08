@@ -54,7 +54,7 @@ describe(`Render App`, () => {
   const store = mockStore({
     mistakes: 3,
   });
-  it(`Render WelcomeScreen`, () => {
+  it(`renders WelcomeScreen component`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
@@ -77,7 +77,7 @@ describe(`Render App`, () => {
   });
 
 
-  it(`Render QuestionGenre`, () => {
+  it(`render QuestionGenre component`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
@@ -99,7 +99,7 @@ describe(`Render App`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Render QuestionArtist`, () => {
+  it(`render QuestionArtist component`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
@@ -121,7 +121,7 @@ describe(`Render App`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Render WinScreen`, () => {
+  it(`renders WinScreen component`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
@@ -143,7 +143,7 @@ describe(`Render App`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Render GameOverScreen`, () => {
+  it(`render GameOverScreen component`, () => {
     const tree = renderer
       .create(
           <Provider store={store}>
@@ -166,5 +166,3 @@ describe(`Render App`, () => {
   });
 
 });
-
-

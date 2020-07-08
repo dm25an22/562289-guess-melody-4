@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Should GameOverScreen render correctly 1`] = `
+exports[`render GameOverScreen component 1`] = `
 <section
   className="result"
 >

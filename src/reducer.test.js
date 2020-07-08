@@ -1,7 +1,6 @@
 import {reducer, ActionType, ActionCreator} from "./reducer";
 import {extend} from "./utils";
 
-
 const questions = [
   {
     type: `genre`,
@@ -81,7 +80,6 @@ it(`Reducer should increment current step by a given value`, () => {
     mistakes: 0,
     questions
   });
-
 });
 
 it(`Reducer should increment number of mistakes by a given value`, () => {
@@ -227,11 +225,9 @@ it(`Reducer should return step 0 and other states default`, () => {
   })).toEqual(extend(defaultState, {
     step: 0
   }));
-
 });
 
-
-it(`Action creator for incrementing mistake returns action with 1 payload if answer for genre is incorrect`, () => {
+it(`returns action with 1 payload if answer for genre is incorrect`, () => {
   expect(ActionCreator.incrementMistake({
     type: `genre`,
     genre: `jazz`,
@@ -256,7 +252,7 @@ it(`Action creator for incrementing mistake returns action with 1 payload if ans
   });
 });
 
-it(`Action creator for reset game returns action with null payload`, () => {
+it(`returns action with null payload for reset game`, () => {
   expect(ActionCreator.resetGame())
     .toEqual({
       type: ActionType.RESET_GAME,

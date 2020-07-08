@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render App Render GameOverScreen 1`] = `
+exports[`Render App render GameOverScreen component 1`] = `
 <section
   className="result"
 >
@@ -34,7 +34,7 @@ exports[`Render App Render GameOverScreen 1`] = `
 </section>
 `;
 
-exports[`Render App Render QuestionArtist 1`] = `
+exports[`Render App render QuestionArtist component 1`] = `
 <section
   className="game game--artist"
 >
@@ -192,7 +192,7 @@ exports[`Render App Render QuestionArtist 1`] = `
 </section>
 `;
 
-exports[`Render App Render QuestionGenre 1`] = `
+exports[`Render App render QuestionGenre component 1`] = `
 <section
   className="game game--genre"
 >
@@ -404,7 +404,7 @@ exports[`Render App Render QuestionGenre 1`] = `
 </section>
 `;
 
-exports[`Render App Render WelcomeScreen 1`] = `
+exports[`Render App renders WelcomeScreen component 1`] = `
 <section
   className="welcome"
 >
@@ -458,7 +458,7 @@ exports[`Render App Render WelcomeScreen 1`] = `
 </section>
 `;
 
-exports[`Render App Render WinScreen 1`] = `
+exports[`Render App renders WinScreen component 1`] = `
 <section
   className="result"
 >
