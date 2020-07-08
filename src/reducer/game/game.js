@@ -1,12 +1,10 @@
-import {extend} from "./utils";
-import {GameType} from "./const";
-import questions from "./mocks/questions";
+import {extend} from "../../utils";
+import {GameType} from "../../const";
 
 const initialState = {
   mistakes: 0,
   maxMistakes: 3,
   step: -1,
-  questions
 };
 
 const isArtistAnswerCorrect = ((question, userAnswer) => {
