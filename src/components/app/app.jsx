@@ -10,7 +10,9 @@ import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
 import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
 import WinScreen from "../../components/win-screen/win-screen.jsx";
 import GameOverScreen from "../../components/game-over-screen/game-over-screen.jsx";
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/game/game.js";
+import {getQuestions} from "../../reducer/data/selectors";
+import {getMistakes, getMaxMistakes, getStep} from "../../reducer/game/selectors";
 import {connect} from "react-redux";
 
 const QuestionGenreWrapped = withAudioPlayer(withUserAnswer(QuestionGenre));
@@ -124,10 +126,10 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  step: state.step,
-  questions: state.questions,
-  mistakes: state.mistakes,
-  maxMistakes: state.maxMistakes
+  step: getStep(state),
+  questions: getQuestions(state),
+  mistakes: getMistakes(state),
+  maxMistakes: getMaxMistakes(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
