@@ -3,6 +3,8 @@ import renderer from "react-test-renderer";
 import {App} from "./app.jsx";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space.js";
+
 
 const mockStore = configureStore([]);
 
@@ -51,10 +53,15 @@ const questions = [
 const maxMistakes = 3;
 
 describe(`Render App`, () => {
-  const store = mockStore({
-    mistakes: 3,
-  });
+
+
   it(`renders WelcomeScreen component`, () => {
+    const store = mockStore({
+      [NameSpace.GAME]: {
+        mistakes: 0,
+      }
+    });
+
     const tree = renderer
       .create(
           <Provider store={store}>
@@ -78,6 +85,12 @@ describe(`Render App`, () => {
 
 
   it(`render QuestionGenre component`, () => {
+    const store = mockStore({
+      [NameSpace.GAME]: {
+        mistakes: 0,
+      }
+    });
+
     const tree = renderer
       .create(
           <Provider store={store}>
@@ -100,6 +113,11 @@ describe(`Render App`, () => {
   });
 
   it(`render QuestionArtist component`, () => {
+    const store = mockStore({
+      [NameSpace.GAME]: {
+        mistakes: 0,
+      }
+    });
     const tree = renderer
       .create(
           <Provider store={store}>
@@ -122,6 +140,12 @@ describe(`Render App`, () => {
   });
 
   it(`renders WinScreen component`, () => {
+    const store = mockStore({
+      [NameSpace.GAME]: {
+        mistakes: 0,
+      }
+    });
+
     const tree = renderer
       .create(
           <Provider store={store}>
@@ -144,6 +168,12 @@ describe(`Render App`, () => {
   });
 
   it(`render GameOverScreen component`, () => {
+    const store = mockStore({
+      [NameSpace.GAME]: {
+        mistakes: 3,
+      }
+    });
+
     const tree = renderer
       .create(
           <Provider store={store}>
