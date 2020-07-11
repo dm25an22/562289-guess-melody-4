@@ -9,7 +9,7 @@ import {createApi} from "./api";
 import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
-const api = createApi(() => {});
+const api = createApi();
 
 const store = createStore(
     reducer,

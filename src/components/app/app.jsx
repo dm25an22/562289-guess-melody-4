@@ -14,9 +14,11 @@ import {ActionCreator} from "../../reducer/game/game.js";
 import {getQuestions} from "../../reducer/data/selectors";
 import {getMistakes, getMaxMistakes, getStep} from "../../reducer/game/selectors";
 import {connect} from "react-redux";
+import AuthScreen from "../auth-sreen/auth-sreen.jsx";
 
 const QuestionGenreWrapped = withAudioPlayer(withUserAnswer(QuestionGenre));
 const QuestionArtistWrapped = withAudioPlayer(QuestionArtist);
+
 class App extends PureComponent {
   constructor(props) {
     super(props);
@@ -42,6 +44,12 @@ class App extends PureComponent {
               onAnswer={onUserAnswer}
             />
           </Route>
+          <Route exact path="/dev-auth">
+            <AuthScreen
+              onReplayButtonClick={() => {}}
+              onSubmit={() => {}}
+            />
+          </Route>
         </Switch>
       </BrowserRouter>
     );
@@ -55,7 +63,7 @@ class App extends PureComponent {
       onWelcomeButtonClick,
       onUserAnswer,
       mistakes,
-      resetGame
+      resetGame,
     } = this.props;
 
     const question = questions[step];
@@ -76,11 +84,13 @@ class App extends PureComponent {
     }
 
     if (step >= questions.length) {
-      return <WinScreen
-        mistakes={mistakes}
-        countQuestions={questions.length}
-        onReplayButtonClick={resetGame}
-      />;
+      return (
+        <WinScreen
+          countQuestions={questions.length}
+          mistakes={mistakes}
+          onReplayButtonClick={resetGame}
+        />
+      );
     }
 
     if (question) {
@@ -129,7 +139,7 @@ const mapStateToProps = (state) => ({
   step: getStep(state),
   questions: getQuestions(state),
   mistakes: getMistakes(state),
-  maxMistakes: getMaxMistakes(state)
+  maxMistakes: getMaxMistakes(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

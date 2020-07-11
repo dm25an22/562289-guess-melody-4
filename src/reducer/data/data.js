@@ -1,5 +1,4 @@
 import {extend} from "../../utils";
-// import questions from "../../mock/questions";
 
 const initialState = {
   questions: []
