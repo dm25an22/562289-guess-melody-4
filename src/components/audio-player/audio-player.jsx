@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const AudioPlayer = ({onButtonClick, isPlaying, children}) => {
-  return (
+class AudioPlayer extends React.PureComponent {
+  render() {
+    const {onButtonClick, isPlaying, children} = this.props;
+    return (
       <>
         <button
           onClick={onButtonClick}
@@ -13,8 +15,10 @@ const AudioPlayer = ({onButtonClick, isPlaying, children}) => {
           {children}
         </div>
       </>
-  );
-};
+    );
+  }
+
+}
 
 
 AudioPlayer.propTypes = {
