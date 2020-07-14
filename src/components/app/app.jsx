@@ -10,9 +10,11 @@ import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
 import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
 import WinScreen from "../../components/win-screen/win-screen.jsx";
 import GameOverScreen from "../../components/game-over-screen/game-over-screen.jsx";
-import {ActionCreator} from "../../reducer/game/game.js";
+import {ActionCreator as GameActionCreator} from "../../reducer/game/game.js";
 import {getQuestions} from "../../reducer/data/selectors";
 import {getMistakes, getMaxMistakes, getStep} from "../../reducer/game/selectors";
+import {AuthorizationStatus, Operation as UserOperation} from "../../reducer/user/user";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {connect} from "react-redux";
 import AuthScreen from "../auth-sreen/auth-sreen.jsx";
 
@@ -64,6 +66,8 @@ class App extends PureComponent {
       onUserAnswer,
       mistakes,
       resetGame,
+      authorizationStatus,
+      login
     } = this.props;
 
     const question = questions[step];
@@ -84,13 +88,23 @@ class App extends PureComponent {
     }
 
     if (step >= questions.length) {
-      return (
-        <WinScreen
-          countQuestions={questions.length}
-          mistakes={mistakes}
-          onReplayButtonClick={resetGame}
-        />
-      );
+      if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+        return (
+          <AuthScreen
+            onReplayButtonClick={resetGame}
+            onSubmit={login}
+          />
+        );
+      } else if (authorizationStatus === AuthorizationStatus.AUTH) {
+        return (
+          <WinScreen
+            mistakes={mistakes}
+            countQuestions={questions.length}
+            onReplayButtonClick={resetGame}
+          />
+        );
+      }
+
     }
 
     if (question) {
@@ -126,6 +140,8 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  login: PropTypes.func.isRequired,
   mistakes: PropTypes.number.isRequired,
   maxMistakes: PropTypes.number.isRequired,
   questions: PropTypes.array.isRequired,
@@ -136,6 +152,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
   step: getStep(state),
   questions: getQuestions(state),
   mistakes: getMistakes(state),
@@ -143,17 +160,21 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  login(authData) {
+    dispatch(UserOperation.login(authData));
+  },
+
   onWelcomeButtonClick() {
-    dispatch(ActionCreator.incrementStep());
+    dispatch(GameActionCreator.incrementStep());
   },
 
   onUserAnswer(question, userAnswer) {
-    dispatch(ActionCreator.incrementMistake(question, userAnswer));
-    dispatch(ActionCreator.incrementStep());
+    dispatch(GameActionCreator.incrementMistake(question, userAnswer));
+    dispatch(GameActionCreator.incrementStep());
   },
 
   resetGame() {
-    dispatch(ActionCreator.resetGame());
+    dispatch(GameActionCreator.resetGame());
   }
 });
 
