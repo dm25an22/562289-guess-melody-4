@@ -73,6 +73,8 @@ describe(`Render App`, () => {
               onWelcomeButtonClick={() => {}}
               step={-1}
               resetGame={() => {}}
+              authorizationStatus={`NO_AUTH`}
+              login={() => {}}
             />
           </Provider>, {
             createNodeMock: () => {
@@ -102,6 +104,8 @@ describe(`Render App`, () => {
               onWelcomeButtonClick={() => {}}
               step={0}
               resetGame={() => {}}
+              authorizationStatus={`NO_AUTH`}
+              login={() => {}}
             />
           </Provider>, {
             createNodeMock: () => {
@@ -129,6 +133,8 @@ describe(`Render App`, () => {
               onWelcomeButtonClick={() => {}}
               step={1}
               resetGame={() => {}}
+              authorizationStatus={`NO_AUTH`}
+              login={() => {}}
             />
           </Provider>, {
             createNodeMock: () => {
@@ -157,6 +163,8 @@ describe(`Render App`, () => {
               onWelcomeButtonClick={() => {}}
               step={3}
               resetGame={() => {}}
+              authorizationStatus={`NO_AUTH`}
+              login={() => {}}
             />
           </Provider>, {
             createNodeMock: () => {
@@ -185,6 +193,8 @@ describe(`Render App`, () => {
               onWelcomeButtonClick={() => {}}
               step={2}
               resetGame={() => {}}
+              authorizationStatus={`NO_AUTH`}
+              login={() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

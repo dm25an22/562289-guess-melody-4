@@ -17,8 +17,8 @@ class AuthScreen extends React.PureComponent {
     const {onSubmit} = this.props;
 
     onSubmit({
-      login: this._loginRef.current.value,
-      password: this._loginRef.current.value
+      email: this._loginRef.current.value,
+      password: this._passwordRef.current.value
     });
   }
 
