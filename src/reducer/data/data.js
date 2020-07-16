@@ -21,7 +21,7 @@ const Operation = {
   loadQuestions: () => (dispatch, getState, api) => {
     return api.get(`/questions`)
       .then((response) => {
-        dispatch(ActionCreator.loadQuestions(response.data.slice(0, 2)));
+        dispatch(ActionCreator.loadQuestions(response.data.slice(0, 3)));
       });
   }
 };

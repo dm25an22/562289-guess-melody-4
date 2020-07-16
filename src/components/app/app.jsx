@@ -4,7 +4,7 @@ import GameScreen from "../game-screen/game-screen.jsx";
 import QuestionGenre from "../question-genre/question-genre.jsx";
 import QuestionArtist from "../question-artist/question-artist.jsx";
 import PropTypes from "prop-types";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
 import {GameType} from "../../const.js";
 import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
 import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
@@ -17,46 +17,13 @@ import {AuthorizationStatus, Operation as UserOperation} from "../../reducer/use
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {connect} from "react-redux";
 import AuthScreen from "../auth-sreen/auth-sreen.jsx";
+import history from "../../history.js";
+import {AppRoute} from "../../const.js";
 
 const QuestionGenreWrapped = withAudioPlayer(withUserAnswer(QuestionGenre));
 const QuestionArtistWrapped = withAudioPlayer(QuestionArtist);
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const {questions, onUserAnswer} = this.props;
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            {this._renderGameScreen()}
-          </Route>
-          <Route exact path="/dev-genre">
-            <QuestionGenreWrapped
-              question={questions[0]}
-              onAnswer={onUserAnswer}
-            />
-          </Route>
-          <Route exact path="/dev-artist">
-            <QuestionArtistWrapped
-              question={questions[1]}
-              onAnswer={onUserAnswer}
-            />
-          </Route>
-          <Route exact path="/dev-auth">
-            <AuthScreen
-              onReplayButtonClick={() => {}}
-              onSubmit={() => {}}
-            />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-
   _renderGameScreen() {
     const {
       maxMistakes,
@@ -65,9 +32,7 @@ class App extends PureComponent {
       onWelcomeButtonClick,
       onUserAnswer,
       mistakes,
-      resetGame,
       authorizationStatus,
-      login
     } = this.props;
 
     const question = questions[step];
@@ -82,29 +47,17 @@ class App extends PureComponent {
     }
 
     if (mistakes >= maxMistakes) {
-      return <GameOverScreen
-        onReplayButtonClick={resetGame}
-      />;
+      return history.push(AppRoute.LOSE);
     }
 
     if (step >= questions.length) {
       if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
-        return (
-          <AuthScreen
-            onReplayButtonClick={resetGame}
-            onSubmit={login}
-          />
-        );
+        return history.push(AppRoute.LOGIN);
       } else if (authorizationStatus === AuthorizationStatus.AUTH) {
-        return (
-          <WinScreen
-            mistakes={mistakes}
-            countQuestions={questions.length}
-            onReplayButtonClick={resetGame}
-          />
-        );
+        return history.push(AppRoute.RESULT);
       }
 
+      return null;
     }
 
     if (question) {
@@ -135,6 +88,37 @@ class App extends PureComponent {
       }
     }
     return null;
+  }
+
+  render() {
+    const {questions, login, resetGame, mistakes} = this.props;
+    return (
+      <Router history={history}>
+        <Switch>
+          <Route exact path={AppRoute.ROOT}>
+            {this._renderGameScreen()}
+          </Route>
+          <Route exact path={AppRoute.LOGIN}>
+            <AuthScreen
+              onReplayButtonClick={resetGame}
+              onSubmit={login}
+            />
+          </Route>
+          <Route exact path={AppRoute.LOSE} >
+            <GameOverScreen
+              onReplayButtonClick={resetGame}
+            />
+          </Route>
+          <Route exact path={AppRoute.RESULT} >
+            <WinScreen
+              mistakes={mistakes}
+              countQuestions={questions.length}
+              onReplayButtonClick={resetGame}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
   }
 
 }

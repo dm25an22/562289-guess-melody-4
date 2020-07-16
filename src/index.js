@@ -23,7 +23,7 @@ const store = createStore(
     )
 );
 
-store.dispatch(UserOperation.checkAuth());
+// store.dispatch(UserOperation.checkAuth());
 store.dispatch(DataOperation.loadQuestions());
 
 ReactDom.render(

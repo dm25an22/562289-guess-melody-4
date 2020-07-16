@@ -9,7 +9,8 @@ const WelcomeScreen = ({errorsCount, onWelcomeButtonClick}) => {
       </div>
       <button
         onClick={onWelcomeButtonClick}
-        className="welcome__button"><span className="visually-hidden">Начать игру</span></button>
+        className="welcome__button"><span className="visually-hidden">Начать игру</span>
+      </button>
       <h2 className="welcome__rules-title">Правила игры</h2>
       <p className="welcome__text">Правила просты:</p>
       <ul className="welcome__rules-list">
