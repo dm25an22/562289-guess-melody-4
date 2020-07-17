@@ -1,5 +1,7 @@
 import React, {createRef} from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
+import {AppRoute} from "../../const";
 
 class AuthScreen extends React.PureComponent {
   constructor(props) {
@@ -24,7 +26,6 @@ class AuthScreen extends React.PureComponent {
 
   render() {
     const {onReplayButtonClick} = this.props;
-
     return (
       <section className="login">
         <div className="login__logo"><img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83" /></div>
@@ -42,7 +43,7 @@ class AuthScreen extends React.PureComponent {
           </p>
           <button className="login__button button" type="submit">Войти</button>
         </form>
-        <button onClick={onReplayButtonClick} className="replay" type="button">Сыграть ещё раз</button>
+        <Link to={AppRoute.ROOT} onClick={onReplayButtonClick} className="replay">Сыграть ещё раз</Link>
       </section>
     );
   }

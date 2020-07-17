@@ -4,7 +4,7 @@ import GameScreen from "../game-screen/game-screen.jsx";
 import QuestionGenre from "../question-genre/question-genre.jsx";
 import QuestionArtist from "../question-artist/question-artist.jsx";
 import PropTypes from "prop-types";
-import {Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
 import {GameType} from "../../const.js";
 import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
 import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
@@ -17,8 +17,8 @@ import {AuthorizationStatus, Operation as UserOperation} from "../../reducer/use
 import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {connect} from "react-redux";
 import AuthScreen from "../auth-sreen/auth-sreen.jsx";
-import history from "../../history.js";
 import {AppRoute} from "../../const.js";
+import PrivateRoute from "../privat-route/privat-route.jsx";
 
 const QuestionGenreWrapped = withAudioPlayer(withUserAnswer(QuestionGenre));
 const QuestionArtistWrapped = withAudioPlayer(QuestionArtist);
@@ -47,14 +47,14 @@ class App extends PureComponent {
     }
 
     if (mistakes >= maxMistakes) {
-      return history.push(AppRoute.LOSE);
+      return <Redirect to={AppRoute.LOSE} />;
     }
 
     if (step >= questions.length) {
       if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
-        return history.push(AppRoute.LOGIN);
+        return <Redirect to={AppRoute.LOGIN} />;
       } else if (authorizationStatus === AuthorizationStatus.AUTH) {
-        return history.push(AppRoute.RESULT);
+        return <Redirect to={AppRoute.RESULT} />;
       }
 
       return null;
@@ -92,8 +92,9 @@ class App extends PureComponent {
 
   render() {
     const {questions, login, resetGame, mistakes} = this.props;
+    debugger
     return (
-      <Router history={history}>
+      <BrowserRouter>
         <Switch>
           <Route exact path={AppRoute.ROOT}>
             {this._renderGameScreen()}
@@ -109,15 +110,21 @@ class App extends PureComponent {
               onReplayButtonClick={resetGame}
             />
           </Route>
-          <Route exact path={AppRoute.RESULT} >
-            <WinScreen
-              mistakes={mistakes}
-              countQuestions={questions.length}
-              onReplayButtonClick={resetGame}
-            />
-          </Route>
+          <PrivateRoute
+            exact
+            path={AppRoute.RESULT}
+            render={() => {
+              return (
+                <WinScreen
+                  mistakes={mistakes}
+                  countQuestions={questions.length}
+                  onReplayButtonClick={resetGame}
+                />
+              );
+            }}
+          />
         </Switch>
-      </Router>
+      </BrowserRouter>
     );
   }
 
